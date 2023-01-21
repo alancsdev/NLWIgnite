@@ -44,19 +44,20 @@ export function SummaryTable() {
       </div>
       {/* Gera os quadrados na tela */}
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        {summaryDates.map((date) => {
-          const dayInSummary = summary.find((day) => {
-            return dayjs(date).isSame(day.date, 'day');
-          });
-          return (
-            <HabitDay
-              date={date}
-              amount={dayInSummary?.amount}
-              completed={dayInSummary?.completed}
-              key={date.toString()}
-            />
-          );
-        })}
+        {summary.length > 0 &&
+          summaryDates.map((date) => {
+            const dayInSummary = summary.find((day) => {
+              return dayjs(date).isSame(day.date, 'day');
+            });
+            return (
+              <HabitDay
+                date={date}
+                amount={dayInSummary?.amount}
+                defaultCompleted={dayInSummary?.completed}
+                key={date.toString()}
+              />
+            );
+          })}
 
         {amountOfDaysToFill > 0 &&
           Array.from({ length: amountOfDaysToFill }).map((_, i) => {
